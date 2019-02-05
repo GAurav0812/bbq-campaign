@@ -1,0 +1,295 @@
+
+body {
+  background-color: #fafafa;
+  padding: 15px;
+}
+
+.noFound {
+  position: fixed;
+  top: 25%;
+}
+
+.error-title {
+  color: #f12335;
+  font-size: x-large;
+  font-weight: 200;
+}
+
+.error-title-p {
+  color: #f9c327;
+  font-weight: 300;
+}
+
+#SignupContent {
+  /* max-width: 600px; */
+  background-color: ffffff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  /*border-color: #c52234;*/
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.mandatory {
+  color: red;
+}
+
+@media screen and (max-width: 600px) {
+
+  #materialToolbar {
+    padding: 10px;
+
+  }
+  md-input-container > md-select {
+    margin-bottom: 16px;
+  }
+}
+
+/*#materialToolbar2 {
+    background: url("../img/bg.jpg");
+    background-color: #010101;
+    color: white;
+}*/
+#materialToolbar2 .header-content {
+  max-width: 360px;
+}
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.head-img {
+  padding: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.date-btn {
+  background-color: #eceae2;
+  padding: 15px;
+  border-radius: 20px;
+  margin: 5px 5px 5px 5px;
+  text-align: center;
+  color: orange;
+  cursor: pointer;
+}
+
+.date-btn:hover {
+  background-color: #39a0d9 !important;
+  color: white !important;
+}
+
+.time-btn {
+  background-color: rgb(250, 250, 250);
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  margin: 5px 5px 5px 5px;
+  text-align: center;
+  border: thin;
+  border-style: solid;
+  border-color: #ec3a1e;
+  color: #ec3a1e;
+  cursor: pointer;
+}
+
+.time-btn:hover {
+  background-color: #ec3a1e !important;
+  color: white !important;
+}
+
+.section-margin {
+  margin-bottom: 15px;
+}
+
+.date-pan {
+  margin-top: 0px !important;
+}
+
+.center {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+}
+
+.resend-btn {
+  text-align: right;
+  font-size: 15px;
+  color: orange;
+  margin-bottom: 14px !important;
+  margin-top: -25px;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+.confirm-div {
+  padding: 15px;
+
+}
+
+.sat-label {
+  margin: auto;
+  width: 26px;
+}
+
+.gren-icon {
+  color: green;
+  width: 15%;
+}
+
+.head-icon {
+  width: 33px;
+  vertical-align: text-top;
+}
+
+.congo {
+  color: #212121;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.congo-h {
+  color: #e02133;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.wel {
+  font-size: 15px;
+  color: #656464;
+  padding: 2px;
+  text-align: center;
+}
+
+.wel-u {
+  font-size: 15px;
+  color: red;
+  padding: 2px;
+  text-align: center;
+}
+
+.gen-md-pan {
+  margin-top: -5px !important;
+}
+
+md-icon.md-default-theme, md-icon {
+  color: #000;
+}
+
+.dob-md-pan {
+  margin-left: -15px !important;
+}
+
+.msg-box {
+  width: 86%;
+}
+
+.verify-failed {
+  float: left;
+  /* text-align: right; */
+  font-size: 13px;
+  color: red;
+  margin-bottom: 10px;
+  padding: 15 p;
+  padding-left: 5PX;
+}
+
+.couponCode {
+  color: #212121
+}
+
+.error-ms {
+  padding: 4px 10px 4px 10px;
+  border-radius: 5px;
+  margin-bottom: 2px;
+}
+
+.timeSlotFullError {
+  font-size: 12px;
+  color: #de3d00;
+}
+
+@media(max-width: 767px) {
+  .sat-head {
+    padding: 8px 6px 0 0;
+    font-size: 15px;
+  }
+  .sat-head-last {
+    padding: 8px 0 0 0;
+    font-size: 15px;
+  }
+}
+
+.sat-head {
+  padding: 5px 15px 0 0;
+}
+
+.sat-head-last {
+  padding: 5px 0 0 0;
+}
+
+@media(max-width: 350px) {
+  .sat-head {
+    padding: 13px 5px 0 0;
+    font-size: 12px;
+  }
+  .sat-head-last {
+    padding: 13px 0 0 0px;
+    margin-left: -8px !important;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .word-space-label {
+    margin-top: 25px !important;
+  }
+}
+
+.inputdemoIcons {
+  /*
+.right-icon {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  left: auto;
+  margin-top: 0;
+}
+*/
+}
+
+.inputdemoIcons .inputIconDemo {
+  min-height: 48px;
+}
+
+.inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.email {
+  color: green;
+}
+
+.inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.noOfPerson {
+  color: green;
+}
+
+.inputdemoIcons md-input-container:not(.md-input-invalid) > md-icon.name {
+  color: dodgerblue;
+}
+
+.inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+.inputdemoIcons md-input-container.md-input-invalid > md-icon.name, .inputdemoIcons md-input-container.md-input-invalid > md-icon.noOfPerson {
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+

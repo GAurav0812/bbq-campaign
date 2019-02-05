@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"  charset="UTF-8" content="width=device-width, initial-scale=1">
+  <title>Offer Page</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel='stylesheet prefetch' href='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css'>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div ng-controller="DemoCtrl" ng-cloak="" class="md-inline-form" ng-app="MyApp" layout="column" layout-sm="row" layout-align="center center" layout-align-sm="start start">
+  <img src="img/logo_h.png" width="" height="" align="middle" class="head-img">
+ <!--  <div class="text-center">You are invited! </div> -->
+		<md-content id="SignupContent" class="md-whiteframe-10dp md-no-momentum" flex-sm>
+				<md-toolbar flex id="materialToolbar">
+						<div class="md-toolbar-tools"> <span flex=""></span> <span class="md-headline" align="center">Register for a free meal!  <img src="img/gift-box.svg" class="head-icon"> </span> <span flex=""></span> </div>
+				</md-toolbar>
+				<div layout-padding="" ng-if="isRegisterPage=='true'">
+					<form name="userForm" method="POST" ng-submit="getOTP(userForm.$valid)" enctype="multipart/form-data">
+								<!-- <label>Select Date <span class="mandatory"> *</span></label>
+								<div layout="row" layout-sm="column">
+								        <md-content>
+    										<section layout="row" class="section-margin" layout-sm="column" layout-align="center center" layout-wrap>
+      										<span class="date-btn mask flex-center hm-zoom" ng-repeat="item in dateArr"><span>{{item.date}}</span><br>
+      										<span>{{item.text}}</span></span>
+   										    </section>
+   										 </md-content>
+								</div>
+								<label>Select Time <span class="mandatory"> *</span></label>
+								<div layout="row" layout-sm="column">	
+           							     <md-content class="center">
+    										<section layout="row" class="section-margin" layout-sm="column" layout-align="center center" layout-wrap>
+      										<span class="time-btn" ng-repeat="item in timeArr">{{item.time}}</span>
+   										    </section>
+   										 </md-content>
+								</div> -->
+								<div layout-gt-sm="row"  layout-sm="column">
+										<md-input-container flex-gt-sm="" class="md-icon-float md-block" flex-gt-sm>
+												<label>Full name</label>
+												<md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+												<input ng-model="user.fullName" name="name" required type="text" ng-pattern="/^[a-zA-Z'. -]+$/" placeholder="Your Full Name">
+												<div ng-if="userForm.name.$dirty" ng-messages="userForm.name.$error" role="alert">
+														<div ng-message="required" class="my-message">First Name is Required.</div>
+														<div ng-message="pattern" class="my-message">Enter correct First Name.</div>
+												</div>
+										</md-input-container>
+										<md-input-container flex-gt-sm=""  class="md-block md-no-float" flex-gt-sm>
+												<label>Mobile</label>
+												<md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+												<input ng-model="user.mobile" name="mobile" required type="text" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" placeholder="Your Mobile Number" maxlength="10">
+												<div ng-if="userForm.mobile.$dirty" ng-messages="userForm.mobile.$error" role="alert">
+														<div ng-message="required" class="my-message">Mobile is Required.</div>
+														<div ng-message="pattern" class="my-message">Enter valid mobile number.</div>
+												</div>
+										</md-input-container>
+								</div>
+								<div layout-gt-sm="row"  layout-sm="column">
+										<md-input-container flex-gt-sm="" class="md-block md-no-float">
+												<label>Email</label>
+												 <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+												<input required type="email" name="email" ng-model="user.email" ng-pattern="/^[_a-z0-9-+]+(\.[_a-z0-9-+]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" placeholder="someone@example.com" />
+												<div ng-if="userForm.email.$dirty" ng-messages="userForm.email.$error" role="alert">
+														<div ng-message="required" class="my-message">Email Address is Required.</div>
+														<div ng-message="pattern" class="my-message">Enter Correct Email Address. </div>
+														<div ng-message="email" class="my-message">Enter Correct Email Address. </div>
+												</div>
+										</md-input-container>
+								</div>
+								<div layout-gt-sm="row" layout-sm="column" >
+										<md-input-container flex-gt-sm="" class="md-block date-pan" flex-gt-sm>
+       										 <label>Preferred Date</label>
+       										    <md-icon md-svg-src="img/ic_date_range_black_24px.svg"></md-icon>
+        										<md-select name="date" placeholder="Preferred date" ng-model="selected.date" ng-change="onDateChange()" required>
+         												<md-option ng-value="item" ng-repeat="item in dateArr">{{item.date}}
+         												</md-option>		 
+        										</md-select>
+       										 <div class="errors" ng-messages="userForm.date.$error">
+          													<div ng-message="required">Preferred Date is Required.</div>
+        									</div>
+      									</md-input-container>
+
+										<md-input-container flex-gt-sm="" class="md-block date-pan" flex-gt->
+       										 <label>Preferred Timeslot</label>
+       										    <md-icon md-svg-src="img/ic_watch_later_black_24px.svg"></md-icon>
+        										<md-select name="time" placeholder="Preferred  timeslot" ng-model="selected.time" ng-disabled="!userForm.date.$dirty" required>
+         												<md-option ng-value="item" ng-repeat="item in timeArr">{{item}}</md-option>		 
+        										</md-select>
+       										 <div class="errors" ng-messages="userForm.time.$error">
+          													<div ng-message="required">Time is Required.</div>
+        									</div>
+      									</md-input-container>
+								</div>
+								<div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;">
+										<md-input-container flex-gt-sm="" md-no-float class="md-block" flex-gt-sm>
+												<label>No of persons</label>
+												<md-icon md-svg-src="img/ic_group_black_24px.svg"></md-icon>
+												<input name="noOfPerson" ng-model="user.noOfPerson" required type="text" minlength="1" maxlength="1" ng-pattern="/^[1-6]/" placeholder="2">
+												<div ng-if="userForm.noOfPerson.$dirty" ng-messages="userForm.noOfPerson.$error" role="alert" multiple>
+												        <div ng-message="required" class="my-message">No of persons is Required.</div>
+														<div ng-message="pattern">It should contain at least 1 and 6 max people.</div>
+												</div>
+										</md-input-container>
+										<md-input-container flex-gt-sm="" class="md-block md-no-float" flex-gt-sm>
+												<label>Locality (Optional)</label>
+												<md-icon md-svg-src="img/ic_person_pin_black_24px.svg"></md-icon>
+												<input name="locality" ng-model="user.locality" type="text" minlength="1" maxlength="20" placeholder="Locality">
+										</md-input-container>
+								</div>
+								<div layout-gt-sm="row"  layout-sm="column">
+									   <md-input-container flex-gt-sm="50" class="gen-md-pan" >
+										<input type="hidden" name="gender" value="{{user.gender}}" md-open-on-focus/>
+										<md-radio-group ng-model="user.gender" required>
+											
+												<md-radio-button value="Male" class="md-primary"><md-icon md-svg-src="img/male.svg" class="name"></md-icon></md-radio-button>
+												<md-radio-button value="Female"  class="md-primary"><md-icon md-svg-src="img/female.svg" class="name"></md-icon></md-radio-button>
+											
+										</md-radio-group>
+                                        </md-input-container>
+										<md-input-container flex-gt-sm="70" class="dob-md-pan" >
+           							   		 <label>DOB</label>
+           									 <md-datepicker ng-model="user.dob" name="dob" required md-placeholder="Enter DOB" md-open-on-focus md-max-date="ctrl.maxDate">
+									    	 </md-datepicker>
+											 <div ng-if="userForm.dob.$dirty" ng-messages="userForm.dob.$error" role="alert">
+												<div ng-message="required">DOB is Required.</div>
+									 	     </div>
+         								</md-input-container>
+								</div>
+								<div layout-gt-sm="row" layout-sm="column">
+										<md-input-container flex-gt-sm="" flex-gt-sm class="msg-box">
+												<label>Message (Optional)</label>
+												<md-icon md-svg-src="img/ic_message_black_24px.svg"></md-icon>
+												<textarea ng-model="user.remark" md-maxlength="150" rows="2" placeholder="Type a message"></textarea>
+										</md-input-container>
+								</div>
+								<md-button class="md-raised md-primary" style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="userForm.$invalid" name="submit">Submit</md-button>
+					</form>
+					</div>
+
+<!-- ng-if="isVerifyOtpPage=='true'" -->
+					<div layout-padding="" ng-if="isVerifyOtpPage=='true'">
+					<div class="md-headline">{{ user.fullName + "(" + user.mobile + ")" }}</div>
+					<div  class="md-title"> {{  selected.date.date +  ", " +  selected.time + ", "+ user.noOfPerson + " person(s)" }}</div>
+						
+						<h4 class="heading">{{heading}}</h3>
+						<form name="verifyForm" method="POST" ng-submit="verifyOTP(verifyForm.$valid)" enctype="multipart/form-data">
+								<input type="hidden" name="action" value="signup" />
+								<div layout-gt-sm="row" layout-sm="column">
+										<md-input-container flex-gt-sm="" class="md-block md-no-float">
+											<label>Enter OTP</label>
+												<input ng-model="verify.enterOtp" name="enterOtp" required type="text" ng-pattern="/^(\+\d{1,3}[- ]?)?\d/" placeholder="Enter OTP" maxlength="10">
+												<div ng-if="verifyForm.enterOtp.$dirty" ng-messages="verifyForm.enterOtp.$error" role="alert">
+														<div ng-message="required" class="my-message">OTP is Required.</div>
+														<div ng-message="pattern" class="my-message">Enter valid OTP.</div>
+												</div>
+										</md-input-container>
+								</div>
+								<div class="resend-btn">
+								              <span ng-click="resendOTP()" class="pull-right">Resend OTP</span>
+							    </div>
+								<div class="verify-failed">
+											  <span ng-if="verifyFailed=='true'"> OTP verification failed!</span>
+											  <span ng-if="wrongOtp=='true'"> Please enter correct OTP.</span>  
+								</div>
+
+								<md-button class="md-raised md-primary" style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="verifyForm.$invalid" name="submit">Verify</md-button>
+						</form>
+					</div>
+
+					<div layout-padding="" class="confirm-div text-center" ng-if="isConfirmPage=='true'">
+                       <img src="img/happiness.svg" class="gren-icon">
+                        <div>
+                        <span class="congo">Congratulation! </span><br>
+                        <span class="wel">You have successfully booked your seat as below</span>
+						<div class="md-headline">{{user.fullName + "(" + user.mobile + ")"}}</div>
+					<div  class="md-subhead"> {{ selected.date.date  +  ", " +  selected.time + ", "+ user.noOfPerson + " person(s)" }}</div>s
+                     </div>
+                    </div>
+
+                    <div layout-padding="" class="confirm-div text-center" ng-if="isErrorPage=='true'">
+                       <img src="img/sad.svg" class="gren-icon">
+                        <div>
+                        <span class="congo-h">Sorry! </span><br>
+                        <span class="wel-u">Something went wrong! please try again</span>
+                     </div>
+                    </div>
+
+                    <div layout-padding="" class="confirm-div text-center" ng-if="isUpdatePage=='true'" >
+                       <img src="img/sad.svg" class="gren-icon">
+                        <div>
+                        <span class="congo-h">Oops! </span><br>
+                        <span class="wel-u">Seems like the slot is full now, please try with another one</span>
+                        </div>
+                        <form name="updateForm" method="POST" ng-submit="getOTP(updateForm.$valid)" enctype="multipart/form-data">
+                        	<div layout-gt-sm="row" layout-sm="column" style="text-align:left;    padding-top: 15px;">
+										<md-input-container flex-gt-sm="" class="md-block date-pan" flex-gt-sm>
+       										 <label>Preferred Date</label>
+       										    <md-icon md-svg-src="img/ic_date_range_black_24px.svg"></md-icon>
+        										<md-select name="date" placeholder="Preferred date" ng-model="updated.date" ng-change="onUpdatedDateChange()" required>
+         												<md-option ng-value="item" ng-repeat="item in dateArr">{{item.date}}
+         												</md-option>		 
+        										</md-select>
+       										 <div class="errors" ng-messages="updateForm.date.$error">
+          													<div ng-message="required">Preferred Date is Required.</div>
+        									</div>
+      									</md-input-container>
+
+										<md-input-container flex-gt-sm="" class="md-block date-pan" flex-gt->
+       										 <label>Preferred Timeslot</label>
+       										    <md-icon md-svg-src="img/ic_watch_later_black_24px.svg"></md-icon>
+        										<md-select name="time" placeholder="Preferred  timeslot" ng-model="updated.time" ng-disabled="!updateForm.date.$dirty" required>
+         												<md-option ng-value="item" ng-repeat="item in timeArr">{{item}}</md-option>		 
+        										</md-select>
+       										 <div class="errors" ng-messages="updateForm.time.$error">
+          													<div ng-message="required">Time is Required.</div>
+        									</div>
+      									</md-input-container>
+								</div>
+								<md-button class="md-raised md-primary" style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="updateForm.$invalid" name="submit">Book Now</md-button>
+								</form>
+                    </div>
+		</md-content>
+</div>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
