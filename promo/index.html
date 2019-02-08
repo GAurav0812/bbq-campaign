@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1">
     <title>Offer Page</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-    <link rel='stylesheet prefetch'
-          href='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css'>
+    <link rel='stylesheet prefetch' href='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=56.354345">
 </head>
@@ -15,355 +15,342 @@
        var rootUrl = pageFullUrlBits[0] + "//" + pageFullUrlBits[2];
        window.location.href = rootUrl + "/register";
  </script> -->
+
 <body>
-<div ng-controller="DemoCtrl" ng-cloak="" ng-app="MyApp" layout="column" layout-sm="row" layout-align="center center"
-     layout-align-sm="start start">
-    <div class="loader" align="center" ng-hide="!isloading">
-        <img src="img/loading.gif" height="35" ng-hide="!isloading"/>
-    </div>
-    <div ng-if="its404Page" class="text-center noFound">
-        <div>
-            <img src="img/monitor.svg" align="middle" height="50">
+    <div ng-controller="DemoCtrl" ng-cloak="" ng-app="MyApp" layout="column" layout-sm="row" layout-align="center center" layout-align-sm="start start">
+        <div class="loader" align="center" ng-hide="!isloading">
+            <img src="img/loading.gif" height="35" ng-hide="!isloading" />
         </div>
-        <span class="error-title" style="color: #f12335;">Page not found <span style="color: #f5ba10">:(</span></span>
-        <p class="error-title-p">Maybe the page you are looking for has been removed, or you typed in the wrong URL</p>
-    </div>
-    <!--  <div class="text-center">You are invited! </div> -->
-    <md-card id="SignupContent" ng-if="!isloading && !its404Page"
-             ng-style="{'border-color': headerInfo.border}" class="md-whiteframe-10dp md-no-momentum" flex-sm>
-        <div layout-gt-sm="row" layout-sm="column" class="md-inline-form">
+        <div ng-if="its404Page" class="text-center noFound">
+            <div>
+                <img src="img/monitor.svg" align="middle" height="50">
+            </div>
+            <span class="error-title" style="color: #f12335;">Page not found <span style="color: #f5ba10">:(</span></span>
+            <p class="error-title-p">Maybe the page you are looking for has been removed, or you typed in the wrong URL</p>
+        </div>
+        <!--  <div class="text-center">You are invited! </div> -->
+        <md-card id="SignupContent" ng-if="!isloading && !its404Page" ng-style="{'border-color': headerInfo.border}" class="md-whiteframe-10dp md-no-momentum" flex-sm>
+            <div layout-gt-sm="row" layout-sm="column" class="md-inline-form">
 
-            <div id="materialToolbar2"
-                 ng-style="{'background-color': headerInfo.background, 
-				           'color': headerInfo.forecolor }"
-                 class="md-hue-3" layout-padding="" ng-if="!isloading">
-                <div align="center"><img ng-src="{{campaignLogo}}" align="middle" height="143"
-                                         class="head-img responsive"></div>
-                <div align="center">
-                    <div class="header-content">
-                        <div><img src="{{campaignIcon}}" class="head-icon" style="width:50px;"></div>
-                        <h2>{{campaignInfo.name}}</h2>
-
-                        <h3 class="md-headline" ng-bind-html="campaignInfo.desc|unsafe"></h3>
-                        <h4 class="md-subhead" ng-if="!isDataCapturingCamp" ng-class="{'hidden-xs': isRegisterPage == 'false'}">Thank you for
-                            visiting our brand new restaurant in textile capital of India and we want to hear your
-                            valuable feedback so that we can keep improving our food and services.
-                            <!-- <br>Please fill this quick survey and let us know your thought (your answers will be anonymous)-->
-                            .</h4>
+                <div id="materialToolbar2" ng-style="{'background-color': headerInfo.background, 
+				           'color': headerInfo.forecolor }" class="md-hue-3" layout-padding="" ng-if="!isloading">
+                    <div align="center"><img ng-src="{{campaignLogo}}" align="middle" height="143" class="head-img responsive"></div>
+                    <div align="center">
+                        <div class="header-content">
+                            <div><img src="{{campaignIcon}}" class="head-icon" style="width:50px;"></div>
+                            <h2 ng-bind-html="campaignInfo.name|unsafe"></h2>
+                            <h3 class="md-headline" ng-bind-html="campaignInfo.desc|unsafe"></h3>
+                            <h4 class="md-subhead" ng-if="!isDataCapturingCamp && campaignInfo.header.name.indexOf('Onesta')===-1 " ng-class="{'hidden-xs': isRegisterPage == 'false'}">Thank you for
+                                visiting our brand new restaurant in textile capital of India and we want to hear your
+                                valuable feedback so that we can keep improving our food and services.
+                                <!-- <br>Please fill this quick survey and let us know your thought (your answers will be anonymous)-->
+                            </h4>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div layout-padding="" ng-if="isRegisterPage=='true'">
-                <form name="userForm" method="POST" ng-submit="getOTP(userForm.$valid)" enctype="multipart/form-data">
-                    <div layout-gt-sm="row" layout-sm="column">
-                        <md-input-container flex-gt-sm="" class="md-icon-float md-block" flex-gt-sm ng-if="campaignInfo.fieldsConfig.fullName">
-                            <label>Full name</label>
-                            <md-icon md-svg-src="img/ic_person.svg" class="name"></md-icon>
-                            <input ng-model="user.fullName" name="name" required minlength="2" type="text"
-                                   ng-pattern="/^[a-zA-Z'. -]+$/" placeholder="Your Full Name">
-                            <div ng-if="userForm.name.$dirty" ng-messages="userForm.name.$error" role="alert">
-                                <div ng-message="required" class="my-message">First Name is Required.</div>
-                                <div ng-message="pattern" class="my-message">Enter correct First Name.</div>
-                            </div>
-                        </md-input-container>
-                       
-                    </div>
-					<div layout-gt-sm="row" layout-sm="column">
-                       
-                        <md-input-container flex-gt-sm="" class="md-block md-no-float" flex-gt-sm 
-						ng-if="campaignInfo.fieldsConfig.mobile">
-                            <label>Mobile</label>
-                            <md-icon md-svg-src="img/ic_phone.svg"></md-icon>
-                            <input ng-model="user.mobile" name="mobile" required type="text"
-                                   ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" placeholder="Your Mobile Number"
-                                   maxlength="10">
-                            <div ng-if="userForm.mobile.$dirty" ng-messages="userForm.mobile.$error" role="alert">
-                                <div ng-message="required" class="my-message">Mobile is Required.</div>
-                                <div ng-message="pattern" class="my-message">Enter valid mobile number.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row" layout-sm="column" ng-if="campaignInfo.fieldsConfig.email">
-                        <md-input-container flex-gt-sm="" class="md-block md-no-float">
-                            <label>Email</label>
-                            <md-icon md-svg-src="img/ic_email.svg" class="email"></md-icon>
-                            <input required type="email" name="email" ng-model="user.email"
-                                   ng-pattern="/^[_a-zA-Z0-9-+]+(\.[_a-zA-Z0-9-+]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
-                                   placeholder="someone@example.com"/>
-                            <div ng-if="userForm.email.$dirty" ng-messages="userForm.email.$error" role="alert">
-                                <div ng-message="required" class="my-message">Email Address is Required.</div>
-                                <div ng-message="pattern" class="my-message">Enter Correct Email Address.</div>
-                                <div ng-message="email" class="my-message">Enter Correct Email Address.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row" layout-sm="column"  ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.hearQues">
-                        <md-input-container flex-gt-sm="" class="md-block date-pan" flex-gt- >
-                            <label>How did you hear about us in {{campaignInfo.campaignLocation}} ?</label>
-                            <md-icon md-svg-src="img/question-mark.svg"></md-icon>
-                            <md-select name="resource" placeholder="How did you hear about us in {{campaignInfo.campaignLocation}}?"
-                                       ng-model="selected.resource" ng-required="!isDataCapturingCamp">
-                                <md-option ng-value="item" ng-repeat="item in resourseList">{{item}}</md-option>
-                            </md-select>
-                            <div class="errors" ng-messages="userForm.resource.$error">
-                                <div ng-message="required">Resource is Required.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;" ng-if="campaignInfo.fieldsConfig.age">
-                        <md-input-container flex-gt-sm="" class="">
-                            <input type="hidden" name="ageGroup" value="{{user.ageGroup}}" md-open-on-focus/>
-                            <label style="transform: translate3d(0,6px,0) scale(.75);">Age Group*</label>
-                            <md-radio-group style="display: inline-grid!important;" ng-model="user.ageGroup" required>
-
-                                <md-radio-button value="Below 20 Years" class="md-primary"> Below 20 Years
-                                </md-radio-button>
-                                <md-radio-button value="20 - 28 Years" class="md-primary"> 20 - 28 Years
-                                </md-radio-button>
-                                <md-radio-button value="28 - 35 Years" class="md-primary"> 28 - 35 Years
-                                </md-radio-button>
-                                <md-radio-button value="35 - 45 Years" class="md-primary"> 35 - 45 Years
-                                </md-radio-button>
-                                <md-radio-button value="45 & Above" class="md-primary"> 45 & Above</md-radio-button>
-
-                            </md-radio-group>
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;" >
-                        <md-input-container flex-gt-sm="50" class="" ng-if="campaignInfo.fieldsConfig.gender">
-                            <input type="hidden" name="gender" value="{{user.gender}}" md-open-on-focus/>
-                            <label style="transform: translate3d(0,6px,0) scale(.75);">Gender*</label>
-                            <md-radio-group ng-model="user.gender" required>
-
-                                <md-radio-button value="Male" class="md-primary">
-                                    <md-icon md-svg-src="img/male.svg" class="name"></md-icon>
-                                </md-radio-button>
-                                <md-radio-button value="Female" class="md-primary">
-                                    <md-icon md-svg-src="img/female.svg" class="name"></md-icon>
-                                </md-radio-button>
-
-                            </md-radio-group>
-                        </md-input-container>
-                        <md-input-container flex-gt-sm="" class="md-block md-no-float"  ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.locality" flex-gt-sm>
-                            <label>Locality</label>
-                            <md-icon md-svg-src="img/ic_person_pin_black_24px.svg"></md-icon>
-                            <input name="locality" ng-model="user.locality" type="text" minlength="1" maxlength="20"
-                                   placeholder="Locality" ng-required="!isDataCapturingCamp">
-                            <div ng-if="userForm.locality.$dirty" ng-messages="userForm.locality.$error" role="alert">
-                                <div ng-message="required" class="my-message">Locality is Required.</div>
-                            </div>
-                        </md-input-container>
-                    </div>
-                    <div layout-gt-sm="row" layout-sm="column" ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.satisfyRate">
-                        <div flex-gt-sm="">
-                            <input type="hidden" name="rating" value="{{user.rating}}" md-open-on-focus/>
-                            <label style="font-size: 12px;color: #afafaf;">How satisfied were you at {{campaignInfo.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.name}} in {{campaignInfo.campaignLocation}} ?*</label>
-                            <div style="display: flex!important;margin: 18px 0;">
-                                <div class="sat-head">
-                                    <div><br></div>
-                                    <div>Poor</div>
+                <div layout-padding="" ng-if="isRegisterPage=='true'">
+                    <form name="userForm" method="POST" ng-submit="getOTP(userForm.$valid)" enctype="multipart/form-data">
+                        <div layout-gt-sm="row" layout-sm="column">
+                            <md-input-container flex-gt-sm="" class="md-icon-float md-block" flex-gt-sm ng-if="campaignInfo.fieldsConfig.fullName">
+                                <label>Full name</label>
+                                <md-icon md-svg-src="img/ic_person.svg" class="name"></md-icon>
+                                <input ng-model="user.fullName" name="name" required minlength="2" type="text" autocomplete="off" ng-pattern="/^[a-zA-Z'. -]+$/" placeholder="Your Full Name">
+                                <div ng-if="userForm.name.$dirty" ng-messages="userForm.name.$error" role="alert">
+                                    <div ng-message="required" class="my-message">First Name is Required.</div>
+                                    <div ng-message="pattern" class="my-message">Enter correct First Name.</div>
                                 </div>
-                                <label>
-                                    <div class="sat-label">1</div>
-                                    <div>
-                                        <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
-                                            <md-radio-button class="md-primary" name="rating"
-                                                             value="1"></md-radio-button>
-                                        </md-radio-group>
+                            </md-input-container>
+
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column">
+
+                            <md-input-container flex-gt-sm="" class="md-block md-no-float" flex-gt-sm ng-if="campaignInfo.fieldsConfig.mobile">
+                                <label>Mobile</label>
+                                <md-icon md-svg-src="img/ic_phone.svg"></md-icon>
+                                <input ng-model="user.mobile" name="mobile" required type="text" autocomplete="off" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" placeholder="Your Mobile Number" maxlength="10">
+                                <div ng-if="userForm.mobile.$dirty" ng-messages="userForm.mobile.$error" role="alert">
+                                    <div ng-message="required" class="my-message">Mobile is Required.</div>
+                                    <div ng-message="pattern" class="my-message">Enter valid mobile number.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column" ng-if="campaignInfo.fieldsConfig.email">
+                            <md-input-container flex-gt-sm="" class="md-block md-no-float">
+                                <label>Email</label>
+                                <md-icon md-svg-src="img/ic_email.svg" class="email"></md-icon>
+                                <input required type="email" name="email" ng-model="user.email" autocomplete="off" ng-pattern="/^[_a-zA-Z0-9-+]+(\.[_a-zA-Z0-9-+]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" placeholder="someone@example.com" />
+                                <div ng-if="userForm.email.$dirty" ng-messages="userForm.email.$error" role="alert">
+                                    <div ng-message="required" class="my-message">Email Address is Required.</div>
+                                    <div ng-message="pattern" class="my-message">Enter Correct Email Address.</div>
+                                    <div ng-message="email" class="my-message">Enter Correct Email Address.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column" ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.hearQues">
+                            <md-input-container flex-gt-sm="" class="md-block date-pan" flex-gt->
+                                <label>How did you hear about us in {{campaignInfo.campaignLocation}} ?</label>
+                                <md-icon md-svg-src="img/question-mark.svg"></md-icon>
+                                <md-select name="resource" autocomplete="off" placeholder="How did you hear about us in {{campaignInfo.campaignLocation}}?" ng-model="selected.resource" ng-required="!isDataCapturingCamp">
+                                    <md-option ng-value="item" ng-repeat="item in resourseList">{{item}}</md-option>
+                                </md-select>
+                                <div class="errors" ng-messages="userForm.resource.$error">
+                                    <div ng-message="required">Resource is Required.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;" ng-if="campaignInfo.fieldsConfig.age">
+                            <md-input-container flex-gt-sm="" class="">
+                                <input type="hidden" name="ageGroup" autocomplete="off" value="{{user.ageGroup}}" md-open-on-focus />
+                                <label style="transform: translate3d(0,6px,0) scale(.75);">Age Group*</label>
+                                <md-radio-group style="display: inline-grid!important;" ng-model="user.ageGroup" required>
+
+                                    <md-radio-button value="Below 20 Years" class="md-primary"> Below 20 Years
+                                    </md-radio-button>
+                                    <md-radio-button value="20 - 28 Years" class="md-primary"> 20 - 28 Years
+                                    </md-radio-button>
+                                    <md-radio-button value="28 - 35 Years" class="md-primary"> 28 - 35 Years
+                                    </md-radio-button>
+                                    <md-radio-button value="35 - 45 Years" class="md-primary"> 35 - 45 Years
+                                    </md-radio-button>
+                                    <md-radio-button value="45 & Above" class="md-primary"> 45 & Above</md-radio-button>
+
+                                </md-radio-group>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;">
+                            <md-input-container flex-gt-sm="50" class="" ng-if="campaignInfo.fieldsConfig.gender">
+                                <input type="hidden" name="gender" value="{{user.gender}}" md-open-on-focus />
+                                <label style="transform: translate3d(0,6px,0) scale(.75);">Gender*</label>
+                                <md-radio-group ng-model="user.gender" required>
+
+                                    <md-radio-button value="Male" class="md-primary">
+                                        <md-icon md-svg-src="img/male.svg" class="name"></md-icon>
+                                    </md-radio-button>
+                                    <md-radio-button value="Female" class="md-primary">
+                                        <md-icon md-svg-src="img/female.svg" class="name"></md-icon>
+                                    </md-radio-button>
+
+                                </md-radio-group>
+                            </md-input-container>
+                            <md-input-container flex-gt-sm="" class="md-block md-no-float" ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.locality" flex-gt-sm>
+                                <label>Locality</label>
+                                <md-icon md-svg-src="img/ic_person_pin_black_24px.svg"></md-icon>
+                                <input name="locality" ng-model="user.locality" type="text" minlength="1" maxlength="20" autocomplete="off" placeholder="Locality" ng-required="!isDataCapturingCamp">
+                                <div ng-if="userForm.locality.$dirty" ng-messages="userForm.locality.$error" role="alert">
+                                    <div ng-message="required" class="my-message">Locality is Required.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column" ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.satisfyRate">
+                            <div flex-gt-sm="">
+                                <input type="hidden" autocomplete="off" name="rating" value="{{user.rating}}" md-open-on-focus />
+                                <label style="font-size: 12px;color: #afafaf;">How satisfied were you at {{campaignInfo.header.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.header.name}} in {{campaignInfo.campaignLocation}} ?*</label>
+                                <div style="display: flex!important;margin: 18px 0;">
+                                    <div class="sat-head">
+                                        <div><br></div>
+                                        <div>Poor</div>
                                     </div>
-                                </label>
-                                <label>
-                                    <div class="sat-label">2</div>
-                                    <div>
-                                        <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
-                                            <md-radio-button class="md-primary" name="rating"
-                                                             value="2"></md-radio-button>
-                                        </md-radio-group>
+                                    <label>
+                                        <div class="sat-label">1</div>
+                                        <div>
+                                            <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
+                                                <md-radio-button class="md-primary" name="rating" value="1"></md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="sat-label">2</div>
+                                        <div>
+                                            <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
+                                                <md-radio-button class="md-primary" name="rating" value="2"></md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="sat-label">3</div>
+                                        <div>
+                                            <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
+                                                <md-radio-button class="md-primary" name="rating" value="3"></md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="sat-label">4</div>
+                                        <div>
+                                            <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
+                                                <md-radio-button class="md-primary" name="rating" value="4"></md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </label>
+                                    <label>
+                                        <div class="sat-label">5</div>
+                                        <div>
+                                            <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
+                                                <md-radio-button class="md-primary" name="rating" value="5"></md-radio-button>
+                                            </md-radio-group>
+                                        </div>
+                                    </label>
+                                    <div class="sat-head-last">
+                                        <div><br></div>
+                                        <div>Excellent</div>
                                     </div>
-                                </label>
-                                <label>
-                                    <div class="sat-label">3</div>
-                                    <div>
-                                        <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
-                                            <md-radio-button class="md-primary" name="rating"
-                                                             value="3"></md-radio-button>
-                                        </md-radio-group>
-                                    </div>
-                                </label>
-                                <label>
-                                    <div class="sat-label">4</div>
-                                    <div>
-                                        <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
-                                            <md-radio-button class="md-primary" name="rating"
-                                                             value="4"></md-radio-button>
-                                        </md-radio-group>
-                                    </div>
-                                </label>
-                                <label>
-                                    <div class="sat-label">5</div>
-                                    <div>
-                                        <md-radio-group ng-model="user.rating" ng-required="!isDataCapturingCamp">
-                                            <md-radio-button class="md-primary" name="rating"
-                                                             value="5"></md-radio-button>
-                                        </md-radio-group>
-                                    </div>
-                                </label>
-                                <div class="sat-head-last">
-                                    <div><br></div>
-                                    <div>Excellent</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;" ng-if="isDataCapturingCamp && campaignInfo.fieldsConfig.occupation">
-                        <md-input-container flex-gt-sm="" class="">
-                            <input type="hidden" name="occupation" value="{{user.occupation}}" md-open-on-focus/>
-                            <label style="transform: translate3d(0,6px,0) scale(.75);">What is your occupation*</label>
-                            <md-radio-group style="display: inline-grid!important;" ng-model="user.occupation" ng-required="isDataCapturingCamp">
+                        <div layout-gt-sm="row" layout-sm="column" style="margin-top: 15px;" ng-if="isDataCapturingCamp && campaignInfo.fieldsConfig.occupation">
+                            <md-input-container flex-gt-sm="" class="">
+                                <input type="hidden" name="occupation" autocomplete="off" value="{{user.occupation}}" md-open-on-focus />
+                                <label style="transform: translate3d(0,6px,0) scale(.75);">What is your occupation*</label>
+                                <md-radio-group style="display: inline-grid!important;" ng-model="user.occupation" ng-required="isDataCapturingCamp">
 
-                                <md-radio-button value="Student" class="md-primary"> Student
-                                </md-radio-button>
-                                <md-radio-button value="Working" class="md-primary"> Working
-                                </md-radio-button>
-                                <md-radio-button value="Businessman" class="md-primary"> Businessman
-                                </md-radio-button>
-                                <md-radio-button value="Govt Employee" class="md-primary"> Govt Employee
-                                </md-radio-button>
-                                <md-radio-button value="Professional" class="md-primary"> Professional <small>(Doctor,Advocate,Engineer,CA,Artist,Teacher)</small></md-radio-button>
+                                    <md-radio-button value="Student" class="md-primary"> Student
+                                    </md-radio-button>
+                                    <md-radio-button value="Working" class="md-primary"> Working
+                                    </md-radio-button>
+                                    <md-radio-button value="Businessman" class="md-primary"> Businessman
+                                    </md-radio-button>
+                                    <md-radio-button value="Govt Employee" class="md-primary"> Govt Employee
+                                    </md-radio-button>
+                                    <md-radio-button value="Professional" class="md-primary"> Professional <small>(Doctor,Advocate,Engineer,CA,Artist,Teacher)</small></md-radio-button>
 
-                            </md-radio-group>
-                        </md-input-container>
-                    </div>
-    
-                    <div layout-gt-sm="row" layout-sm="column" ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.suggestions">
-                        <md-input-container flex-gt-sm="" flex-gt-sm class="msg-box">
-                            <label>Any valuable suggestions to {{campaignInfo.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.name}} in {{campaignInfo.campaignLocation}} ?</label>
-                            <md-icon md-svg-src="img/ic_message_black_24px.svg"></md-icon>
-                            <textarea ng-model="user.remark" md-maxlength="150" rows="2"
-                                      placeholder="Your answer"></textarea>
-                        </md-input-container>
-                    </div>
-                     <div layout-gt-sm="row" layout-sm="column" ng-if="isDataCapturingCamp && campaignInfo.fieldsConfig.dinedQues" class="word-space-label">
-                        <md-input-container flex-gt-sm="" flex-gt-sm class="msg-box">
-                            <label style="white-space: pre-line!important;width: calc(100% - 0px - 0px)!important;">Have you ever dined in {{campaignInfo.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.name}} in any city,If yes please mention the name of the city?</label>
-                            <md-icon md-svg-src="img/ic_person_pin_black_24px.svg"></md-icon>
-                            <input ng-model="user.pastDinedCity" placeholder="Please mention the city">
-                        </md-input-container>
-                    </div>
-                    <div md-colors="{color:'warn'}" class="error-ms">{{errorMsg}}</div>
-                    <md-button class="md-raised md-primary" ng-hide="registerSubmit"
-                               style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="userForm.$invalid"
-                               name="submit">{{registerButtonText}}
-                    </md-button>
-                    <div align="center" ng-show="registerSubmit"><img src="img/loading.gif" height="35"/></div>
-                </form>
-            </div>
-            <!-- ng-if="isVerifyOtpPage=='true'" -->
-            <div layout-padding="" ng-if="isVerifyOtpPage=='true'">
-                <div class="md-headline">{{user.fullName + "(" + user.mobile + ")"}}
+                                </md-radio-group>
+                            </md-input-container>
+                        </div>
+
+                        <div layout-gt-sm="row" layout-sm="column" ng-if="!isDataCapturingCamp && campaignInfo.fieldsConfig.suggestions">
+                            <md-input-container flex-gt-sm="" flex-gt-sm class="msg-box">
+                                <label>Any valuable suggestions to {{campaignInfo.header.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.header.name}} in {{campaignInfo.campaignLocation}} ?</label>
+                                <md-icon md-svg-src="img/ic_message_black_24px.svg"></md-icon>
+                                <textarea ng-model="user.remark" md-maxlength="150" rows="2" placeholder="Your answer"></textarea>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row" layout-sm="column" ng-if="isDataCapturingCamp && campaignInfo.fieldsConfig.dinedQues" class="word-space-label">
+                            <md-input-container flex-gt-sm="" flex-gt-sm class="msg-box">
+                                <label style="white-space: pre-line!important;width: calc(100% - 0px - 0px)!important;">Have you ever dined in {{campaignInfo.header.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.header.name}} in any city,If yes please mention the name of the city?</label>
+                                <md-icon md-svg-src="img/ic_person_pin_black_24px.svg"></md-icon>
+                                <input ng-model="user.pastDinedCity" placeholder="Please mention the city">
+                            </md-input-container>
+                        </div>
+                        <div md-colors="{color:'warn'}" class="error-ms">{{errorMsg}}</div>
+                        <md-button class="md-raised md-primary" ng-hide="registerSubmit" style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="userForm.$invalid" name="submit">{{registerButtonText}}
+                        </md-button>
+                        <div align="center" ng-show="registerSubmit"><img src="img/loading.gif" height="35" /></div>
+                    </form>
                 </div>
-               <!-- <div class="md-subhead"><span ng-hide="isAllowOnFull">{{ selected.date.date  +  ", " +  selected.time.time }} , </span>{{user.noOfPerson
+                <!-- ng-if="isVerifyOtpPage=='true'" -->
+                <div layout-padding="" ng-if="isVerifyOtpPage=='true'">
+                    <div class="md-headline">{{user.fullName + "(" + user.mobile + ")"}}
+                    </div>
+                    <!-- <div class="md-subhead"><span ng-hide="isAllowOnFull">{{ selected.date.date  +  ", " +  selected.time.time }} , </span>{{user.noOfPerson
                     + " person(s)" }}
                 </div>-->
-                <h4 class="heading">{{heading}}</h4>
-                <form name="verifyForm" method="POST" ng-submit="verifyOTP(verifyForm.$valid)"
-                      enctype="multipart/form-data">
-                    <input type="hidden" name="action" value="signup"/>
-                    <div layout-gt-sm="row" layout-sm="column">
-                        <md-input-container flex-gt-sm="" class="md-block md-no-float">
-                            <label>Enter OTP</label>
-                            <input ng-model="verify.enterOtp" name="enterOtp" required type="text"
-                                   ng-pattern="/^(\+\d{1,3}[- ]?)?\d{5,6}$/" placeholder="Enter OTP" minlength="5"
-                                   ng-disabled="verifyDisabled">
-                            <div ng-if="verifyForm.enterOtp.$dirty" ng-messages="verifyForm.enterOtp.$error"
-                                 role="alert">
-                                <div ng-message="required" class="my-message">OTP is Required.</div>
-                                <div ng-message="pattern" class="my-message">Enter valid OTP.</div>
+                    <h4 class="heading">{{heading}}</h4>
+                    <form name="verifyForm" method="POST" ng-submit="verifyOTP(verifyForm.$valid)" enctype="multipart/form-data">
+                        <input type="hidden" name="action" value="signup" />
+                        <div layout-gt-sm="row" layout-sm="column">
+                            <md-input-container flex-gt-sm="" class="md-block md-no-float">
+                                <label>Enter OTP</label>
+                                <input ng-model="verify.enterOtp" name="enterOtp" autocomplete="off" required type="text" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{5,6}$/" placeholder="Enter OTP" minlength="5" ng-disabled="verifyDisabled">
+                                <div ng-if="verifyForm.enterOtp.$dirty" ng-messages="verifyForm.enterOtp.$error" role="alert">
+                                    <div ng-message="required" class="my-message">OTP is Required.</div>
+                                    <div ng-message="pattern" class="my-message">Enter valid OTP.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div class="resend-btn">
+                            <span ng-click="resendOTP()" class="pull-right">Resend OTP</span>
+                        </div>
+                        <div class="verify-failed">
+                            <span ng-if="verifyFailed=='true'"> OTP verification failed!</span>
+                            <span ng-if="wrongOtp=='true'"> Please enter correct OTP.</span>
+                            <span ng-if="otpResended" style="color: #14e214!important;"> OTP is send to your mobile number.</span>
+                        </div>
+
+                        <md-button class="md-raised md-primary" ng-hide="verifySubmit" style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="verifyForm.$invalid" name="submit">Verify
+                        </md-button>
+                        <div align="center" ng-show="verifySubmit"><img src="img/loading.gif" height="35" />
+                        </div>
+                    </form>
+                </div>
+
+                <div layout-padding="" class="confirm-div text-center" ng-if="isConfirmPage=='true'">
+                    <img src="img/happiness.svg" class="gren-icon">
+                    <div ng-if="isDataCapturingCamp">
+                        <span class="congo">Congratulations! </span><br>
+                        <span class="wel"><br>Thank you for registering.<br>
+                            Our team will contact you soon.<br>Look forward to see you soon.Have a great day & take care.</span><br>
+                        <div class="md-headline" style="padding-top: 15px;">{{user.fullName + "(" + user.mobile + ")"}}</div>
+                        <br>
+                        <div class="md-subhead">
+                            <small></small>
+                        </div>
+                    </div>
+                    <div ng-if="!isDataCapturingCamp">
+                        <div ng-if="campaignInfo.header.name.indexOf('Onesta')===-1 ">
+                            <span class="congo">Congratulations! </span><br>
+                            <span class="wel"><br>Thank you for registering.<br>
+                                Your {{campaignInfo.header.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.header.name}} coupon code is <span class="couponCode">{{couponCode}}</span>.<br>Look forward to see you celebrating in the outlet soon.</span><br>
+                            <div class="md-headline" style="padding-top: 15px;">{{user.fullName + "(" + user.mobile + ")"}}</div>
+                            <br>
+                            <div class="md-subhead">
+                                <small></small>
                             </div>
-                        </md-input-container>
-                    </div>
-                    <div class="resend-btn">
-                        <span ng-click="resendOTP()" class="pull-right">Resend OTP</span>
-                    </div>
-                    <div class="verify-failed">
-                        <span ng-if="verifyFailed=='true'"> OTP verification failed!</span>
-                        <span ng-if="wrongOtp=='true'"> Please enter correct OTP.</span>
-                        <span ng-if="otpResended"
-                              style="color: #14e214!important;"> OTP is send to your mobile number.</span>
-                    </div>
-
-                    <md-button class="md-raised md-primary" ng-hide="verifySubmit" style="width:100%; margin: 0px 0px;"
-                               type="submit" ng-disabled="verifyForm.$invalid" name="submit">Verify
-                    </md-button>
-                    <div align="center" ng-show="verifySubmit"><img src="img/loading.gif" height="35"/>
-                    </div>
-                </form>
-            </div>
-
-            <div layout-padding="" class="confirm-div text-center" ng-if="isConfirmPage=='true'">
-                <img src="img/happiness.svg" class="gren-icon">
-                <div  ng-if="!isDataCapturingCamp">
-                    <span class="congo">Congratulations! </span><br>
-                    <span class="wel"><br>Thank you for registering.<br> 
-                    Your {{campaignInfo.name.indexOf('Onesta')==-1 ? 'Barbeque Nation' : campaignInfo.name}} coupon code is <span class="couponCode">{{couponCode}}</span>.<br>Look forward to see you celebrating in the outlet soon.</span><br>
-                    <div class="md-headline" style="padding-top: 15px;">{{user.fullName + "(" + user.mobile + ")"}}</div>
-                    <br>
-                    <div class="md-subhead">
-                        <small></small>
+                        </div>
+                        <div ng-if="campaignInfo.header.name.indexOf('Onesta')>=0">
+                            <span class="congo">Congratulations! </span><br>
+                            <span class="wel"><br>Thank you for sharing your details.<br>
+                                An unique voucher code has been sent to your mobile number. <br>Look forward to hosting you soon.
+                            </span><br>
+                            <div class="md-headline" style="padding-top: 15px;">{{user.fullName + "(" + user.mobile + ")"}}</div>
+                            <br>
+                            <div class="md-subhead">
+                                <small></small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div  ng-if="isDataCapturingCamp">
-                    <span class="congo">Congratulations! </span><br>
-                    <span class="wel"><br>Thank you for registering.<br> 
-                    Our team will contact you soon.<br>Look forward to see you soon.Have a great day & take care.</span><br>
-                    <div class="md-headline" style="padding-top: 15px;">{{user.fullName + "(" + user.mobile + ")"}}</div>
-                    <br>
-                    <div class="md-subhead">
-                        <small></small>
-                    </div>
-                </div>
-            </div>
 
 
-            <div layout-padding="" class="confirm-div text-center" ng-if="isErrorPage=='true'">
-                <img src="img/sad.svg" class="gren-icon">
-                <div>
-                    <span class="congo-h">Sorry! </span><br>
-                    <span class="wel-u">Something went wrong! please try sometime later</span>
+                <div layout-padding="" class="confirm-div text-center" ng-if="isErrorPage=='true'">
+                    <img src="img/sad.svg" class="gren-icon">
+                    <div>
+                        <span class="congo-h">Sorry! </span><br>
+                        <span class="wel-u">Something went wrong! please try sometime later</span>
+                    </div>
                 </div>
-            </div>   
-            <div layout-padding="" class="confirm-div text-center" ng-if="inValidUserPage">
-                <img src="img/sad.svg" class="gren-icon">
-                <div>
-                    <span class="congo-h">Oops! </span><br>
-                    <span class="wel-u">Seems your number is not registered with us, look forward to see you at the restaurant soon.</span>
+                <div layout-padding="" class="confirm-div text-center" ng-if="inValidUserPage">
+                    <img src="img/sad.svg" class="gren-icon">
+                    <div>
+                        <span class="congo-h">Oops! </span><br>
+                        <span class="wel-u">Seems your number is not registered with us, look forward to see you at the restaurant soon.</span>
+                    </div>
+                </div>
+                <div layout-padding="" class="confirm-div text-center" ng-if="isSlotFullMessage">
+                    <div>
+                        <span class="congo-h">It's a Great Day @ <span ng-bind-html="campaignInfo.name|unsafe"></span>!! </span><br>
+                        <span class="wel-u">{{campaignInfo.campaignOverText}}</span>
+                    </div>
+                </div>
+                <div layout-padding="" class="confirm-div text-center" ng-if="isVoucherOver">
+                    <div>
+                        <span class="congo-h">Oops!</span><br>
+                        <span class="wel-u">{{campaignInfo.campaignOverText}}</span>
+                    </div>
                 </div>
             </div>
-            <div layout-padding="" class="confirm-div text-center" ng-if="isSlotFullMessage">
-                <div>
-                    <span class="congo-h">It's a Great Day @ {{campaignInfo.name}}!! </span><br>
-                    <span class="wel-u">{{campaignInfo.campaignOverText}}</span>
-                </div>
-            </div>
-            <div layout-padding="" class="confirm-div text-center" ng-if="isVoucherOver">
-                <div>
-                    <span class="congo-h">Oops!</span><br>
-                    <span class="wel-u">{{campaignInfo.campaignOverText}}</span>
-                </div>
-            </div>
-        </div>
-    </md-card>
+        </md-card>
 
-</div>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-sanitize.js"></script> 
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js'></script>
-<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
-<script src="js/index.js?v=235324534.23423.234234"></script>
+    </div>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-sanitize.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+    <script src="js/index.js?v=275324534.27424.264234"></script>
 </body>
+
 </html>
